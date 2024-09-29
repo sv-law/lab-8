@@ -4,6 +4,7 @@ function Task(props) {
 
 	console.log(props);
 
+	// Find the task we want to update and update it
 	function onChange() {
 		const updatedTask = {
 			id: props.id,
