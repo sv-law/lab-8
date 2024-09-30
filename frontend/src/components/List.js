@@ -37,7 +37,16 @@ function Task(props) {
 
 	function onClick() {
 		// Find the task we want to delete and remove it
-		props.setTasks(tasks => tasks.filter(task => task.id !== props.id));
+		fetch(`http://localhost/api/tasks/${props.id}`, {
+			method: 'DELETE',
+		})
+		.then(() => {
+			// remove it from the state
+			props.setTasks(tasks => tasks.filter(task => task.id !== props.id));
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+		});
 	}
 
 	return (
@@ -54,7 +63,7 @@ function List(props) {
 	}
 
 	function onClick() {
-		// Find the task we want to delete and remove it
+		// Create task and add to list
 		fetch('http://localhost/api/tasks', {
 			method: 'POST',
 			headers: {
